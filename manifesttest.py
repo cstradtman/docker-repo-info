@@ -3,12 +3,12 @@ import docker_registry_client.manifest_utils as utils
 
 requestlist = [
     {"repo": "mcr.microsoft.com", "repopath": "dotnet/core/sdk", "tag": "latest"},
-    {"repo": "index.docker.io", "repopath": "library/hello-world", "tag": "latest"},
-    # {"repo": "index.docker.io", "repopath": "library/hello-world", "tag": "latest"  #,
+    {"repo": "index.docker.io", "repopath": "library/busybox", "tag": "latest"},
+    # {"repo": "index.docker.io", "repopath": "library/busybox", "tag": "latest"  #,
     #     "username": "repousername", "password": "repopassword"},
     # {"repo": "index.docker.io", "repopath": "dockeraccountname/privaterepo",
-    #    "tag": "latest", "username": "repousername", "rpassword": "repopassword"} #,
-    # {"repo": "index.docker.io", "repopath": "cstradtman/test", "tag": "latest"} ##!!!!!!! this one SHOULD fail do to no credentials
+    #    "tag": "latest", "username": "repousername", "password": "repopassword"} #,
+    # {"repo": "index.docker.io", "repopath": "dockeraccountname/privaterepo", "tag": "latest"} ##!!!!!!! this one SHOULD fail do to no credentials
 ]
 
 for request in requestlist:
