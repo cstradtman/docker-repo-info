@@ -12,7 +12,8 @@ requestlist = [
     #     "username": "repousername", "password": "repopassword"},
     # {"repo": "index.docker.io", "repopath": "dockeraccountname/privaterepo",
     #    "tag": "latest", "username": "repousername", "password": "repopassword"} #,
-    # {"repo": "index.docker.io", "repopath": "dockeraccountname/privaterepo", "tag": "latest"} ##!!!!!!! this one SHOULD fail do to no credentials
+    # {"repo": "index.docker.io", "repopath": "dockeraccountname/privaterepo", "tag": "latest"}
+    #     #                ^^^^^^^^^this one SHOULD fail do to no credentials
 ]
 
 for request in requestlist:

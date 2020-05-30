@@ -4,6 +4,7 @@ __author__ = "Chris Stradtman"
 __license__ = "MIT"
 __version__ = "1.0"
 
+
 def test_methods():
     requestlist = [
         {"repo": "mcr.microsoft.com", "repopath": "dotnet/core/sdk"},
@@ -22,6 +23,7 @@ def test_methods():
         manifest = mysession.GetManifest('latest')
         etag = utils.getManifestEtag(manifest)
         assert isinstance(etag, str)
+
 
 if __name__ == "__main__":
     # execute only if run as a script

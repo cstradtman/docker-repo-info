@@ -1,17 +1,18 @@
-from requests.auth import HTTPBasicAuth
 import requests
 import pprint
 import os
 import logging
-import json
 __author__ = "Chris Stradtman"
 __license__ = "MIT"
 __version__ = "1.0"
 
 
-# From: https://stackoverflow.com/questions/10588644/how-can-i-see-the-entire-http-request-thats-being-sent-by-my-python-application
-# These two lines enable debugging at httplib level (requests->urllib3->http.client)
-# You will see the REQUEST, including HEADERS and DATA, and RESPONSE with HEADERS but without DATA.
+# From:
+# https://stackoverflow.com/questions/10588644/how-can-i-see-the-entire-http-request-thats-being-sent-by-my-python-application
+# These two lines enable debugging at httplib levelß
+# (requests->urllib3->http.client)
+# You will see the REQUEST, including HEADERS and DATA,
+# and RESPONSE with HEADERS but without DATA.
 # The only thing missing will be the response.body which is not logged.
 try:
     import http.client as http_client
@@ -29,7 +30,7 @@ log = logging.getLogger(__name__)
 
 
 class RepoSession:
-    """ 
+    """
     A class use to create a session to a docker repository
     ...
 
@@ -47,7 +48,8 @@ class RepoSession:
         GetTagList()
             Retrieves Tag list for repo
         GetManifest(tag)
-            Retrieves select header and body information for Manifest described by "tag"
+            Retrieves select header and body information for
+            Manifest described by "tag"
     """
 
     # From https://docs.docker.com/registry/spec/auth/token/
@@ -58,14 +60,14 @@ class RepoSession:
         username : str (optional)
             username for authenticated public and private repositories
         password : str (optional)
-            password for authenticated public and private repositories       
+            password for authenticated public and private repositories
         """
 
         self.username = username
         self.password = password
         # 1 Attempt to begin a push/pull operation with the registry.
         self.registry_url = "https://" + registry_base + "/v2/"
-        ####### from https://docs.docker.com/registry/spec/auth/token/ ########
+        # !! from https://docs.docker.com/registry/spec/auth/token/ !! #
         # The token server should first attempt to authenticate the client
         # using any authentication credentials provided with the request
         if username:
@@ -78,7 +80,9 @@ class RepoSession:
         if response_one.status_code == 200:
             logging.info("initial query successful without authorization")
         elif response_one.status_code == 401:
-            # 2 If the registry requires authorization it will return a 401 Unauthorized HTTP response with information on how to authenticate.
+            # 2 If the registry requires authorization it will return a 401
+            #   Unauthorized HTTP response with information on how to
+            #   authenticate.
             self.bearerinfodict = {}
             bearerinfo = response_one.headers["WWW-Authenticate"]
             bearerinfolist = bearerinfo.split(',')
@@ -97,7 +101,7 @@ class RepoSession:
         """
         Parameters
         ----------
-        repository : str 
+        repository : str
             hostname for repository (example: index.docker.io)
         """
 
@@ -112,20 +116,23 @@ class RepoSession:
         self.session = requests.Session()
         self.session.params.update(paramdict)
 
-        # 3 The registry client makes a request to the authorization service for a Bearer token.
+        # 3 The registry client makes a request to the authorization
+        #   service for a Bearer token.
         if self.username and self.bearerinfodict:
-            #self.session.auth = (self.username, self.password)
-            token_response = requests.get(self.bearerinfodict["Bearer realm"], auth=(
-                self.username, self.password), params=paramdict)
+            token_response = requests.get(
+                self.bearerinfodict["Bearer realm"],
+                auth=(self.username, self.password),
+                params=paramdict
+                )
         elif hasattr(self, 'bearerinfodict'):
-            # if self.bearerinfodict:
             token_response = requests.get(
                 self.bearerinfodict["Bearer realm"], params=paramdict)
         else:
             return
         body = token_response.json()
         logging.debug(pprint.pformat(body))
-        # 4 The authorization service returns an opaque Bearer token representing the client’s authorized access.
+        # 4 The authorization service returns an opaque Bearer token
+        #   representing the client’s authorized access.
         self.session.headers.update(
             {'Authorization': 'Bearer ' + body["token"]})
 
@@ -136,8 +143,11 @@ class RepoSession:
         None
         """
         # get list of tags
-        # 5 The client retries the original request with the Bearer token embedded in the request’s Authorization header.
-        # 6 The Registry authorizes the client by validating the Bearer token and the claim set embedded within it and begins the push/pull session as usual.
+        # 5 The client retries the original request with the Bearer token
+        #   embedded in the request’s Authorization header.
+        # 6 The Registry authorizes the client by validating the Bearer
+        #   token and the claim set embedded within it and begins the push/pull
+        #   session as usual.
         logging.debug("Getting TagList")
         TagListResponse = self.session.get(
             self.registry_url+self.repository+"/tags/list")
@@ -156,7 +166,7 @@ class RepoSession:
         """
         Parameters
         ----------
-        tag : str 
+        tag : str
             Manifest tag for repo
         """
         logging.debug("Getting Manifest")
