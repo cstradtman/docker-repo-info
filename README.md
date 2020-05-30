@@ -12,4 +12,4 @@ metadata from private and public docker repositories
  - **manifesttest.py** 
 	 - demonstrates retrieval and post processing of manifest data
  - **test_methods.py** 
-         - test framework for pytest in the github python action
+	 - test framework for pytest in the github python action
