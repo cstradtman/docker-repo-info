@@ -1,9 +1,9 @@
+import docker_registry_client.manifest_utils as utils
+import docker_registry_client.reposession as repo
 __author__ = "Chris Stradtman"
-__license__="MIT"
+__license__ = "MIT"
 __version__ = "1.0"
 
-import docker_registry_client.reposession as repo
-import docker_registry_client.manifest_utils as utils
 
 requestlist = [
     {"repo": "mcr.microsoft.com", "repopath": "dotnet/core/sdk", "tag": "latest"},

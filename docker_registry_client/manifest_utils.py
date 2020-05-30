@@ -2,8 +2,9 @@
 """
 
 __author__ = "Chris Stradtman"
-__license__="MIT"
+__license__ = "MIT"
 __version__ = "1.0"
+
 
 def getManifestEtag(manifest):
     """ returns Etag hash for manifest"""
