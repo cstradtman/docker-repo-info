@@ -1,3 +1,7 @@
+__author__ = "Chris Stradtman"
+__license__="MIT"
+__version__ = "1.0"
+
 import json
 import logging
 import os
@@ -5,6 +9,7 @@ import pprint
 import requests
 from requests.auth import HTTPBasicAuth
 
+# From: https://stackoverflow.com/questions/10588644/how-can-i-see-the-entire-http-request-thats-being-sent-by-my-python-application
 # These two lines enable debugging at httplib level (requests->urllib3->http.client)
 # You will see the REQUEST, including HEADERS and DATA, and RESPONSE with HEADERS but without DATA.
 # The only thing missing will be the response.body which is not logged.

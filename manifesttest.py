@@ -1,3 +1,7 @@
+__author__ = "Chris Stradtman"
+__license__="MIT"
+__version__ = "1.0"
+
 import docker_registry_client.reposession as repo
 import docker_registry_client.manifest_utils as utils
 

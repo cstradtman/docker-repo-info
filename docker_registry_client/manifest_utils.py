@@ -1,6 +1,10 @@
 """Utilities for use with the manifest structure returned by GetManifest
 """
 
+__author__ = "Chris Stradtman"
+__license__="MIT"
+__version__ = "1.0"
+
 def getManifestEtag(manifest): -> str
     """ returns Etag hash for manifest"""
     return manifest["Etag"]
