@@ -11,3 +11,5 @@ metadata from private and public docker repositories
 	 - demonstrates retrieval of tag lists from repositories 
  - **manifesttest.py** 
 	 - demonstrates retrieval and post processing of manifest data
+ - **test_methods.py** 
+	 - test framework for pytest in the github python action
