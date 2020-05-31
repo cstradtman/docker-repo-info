@@ -50,6 +50,9 @@ class RepoSession:
         GetManifest(tag)
             Retrieves select header and body information for
             Manifest described by "tag"
+        GetManifest(tag)
+            Retrieves header information for
+            Manifest described by "tag"
     """
 
     # From https://docs.docker.com/registry/spec/auth/token/
@@ -180,6 +183,27 @@ class RepoSession:
             del fullResponse["Docker-Content-Digest"]
             fullResponse["manifest"] = ManifestResponse.json()
             return fullResponse
+        else:
+            logging.error(str(ManifestResponse.status_code))
+            logging.error(pprint.pformat(ManifestResponse.headers))
+            logging.error(pprint.pformat(ManifestResponse.url))
+            logging.error(pprint.pprint(ManifestResponse.json()))
+            raise Exception("invalid Manifest response")
+
+    def GetManifestHead(self, tag):
+        """
+        Parameters
+        ----------
+        tag : str
+            Manifest tag for repo
+        """
+        logging.debug("Getting Manifest")
+        # get list of manifest information
+        ManifestResponse = self.session.head(
+            self.registry_url+self.repository+"/manifests/"+tag)
+        if ManifestResponse.status_code == 200:
+            logging.debug(pprint.pformat(ManifestResponse))
+            return ManifestResponse.headers
         else:
             logging.error(str(ManifestResponse.status_code))
             logging.error(pprint.pformat(ManifestResponse.headers))
