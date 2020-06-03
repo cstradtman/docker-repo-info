@@ -1,4 +1,3 @@
-import docker_registry_client.manifest_utils as utils
 import docker_registry_client.reposession as repo
 import sys
 
@@ -7,7 +6,7 @@ __license__ = "MIT"
 __version__ = "1.0"
 
 if len(sys.argv) == 4 or len(sys.argv) == 6:
-    request={}
+    request = {}
     request["repo"] = sys.argv[1]
     request["repopath"] = sys.argv[2]
     request["tag"] = sys.argv[3]
